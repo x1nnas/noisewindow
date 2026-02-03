@@ -192,7 +192,7 @@ const Index = () => {
       </Head>
       <div className="min-h-screen bg-background flex flex-col">
         <main className="flex-1 flex flex-col items-center justify-center px-6 py-8 max-w-md mx-auto w-full">
-          <div className="w-full text-center mb-6">
+          <div className="w-full text-center mb-6 mt-12">
             <h1 className="text-3xl font-light text-foreground tracking-wide leading-relaxed" style={{ fontFamily: '"Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.02em' }}>
               {greeting}
             </h1>
