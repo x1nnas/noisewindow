@@ -10,7 +10,7 @@ import NamePrompt from '@/components/NamePrompt';
 import { Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { safeParseJSON, timeToMinutes } from '@/lib/validation';
+import { safeParseJSON, timeToMinutes, formatCountdown } from '@/lib/validation';
 import { TranslationType } from '@/lib/translations';
 
 const getGreeting = (t: TranslationType, name?: string) => {
@@ -80,6 +80,14 @@ const calculateStatus = (t: TranslationType): {
         
         if (currentMinutes >= startMinutes && currentMinutes < endMinutes) {
           return { status: 'available', label: t.status.working };
+        } else if (currentMinutes < startMinutes) {
+          // Before work starts - show countdown
+          const minutesUntilStart = startMinutes - currentMinutes;
+          const countdown = formatCountdown(minutesUntilStart, t.status);
+          return { 
+            status: 'off', 
+            label: `${t.status.workStartingIn} ${countdown}` 
+          };
         } else {
           return { status: 'off', label: t.status.off };
         }
@@ -136,8 +144,8 @@ const Index = () => {
     // Initial calculation
     updateStatus();
 
-    // Update every minute to check for time-based changes
-    const interval = setInterval(updateStatus, 60000);
+    // Update every 30 seconds to keep countdown accurate
+    const interval = setInterval(updateStatus, 30000);
 
     // Listen for schedule updates
     const handleScheduleUpdate = () => updateStatus();

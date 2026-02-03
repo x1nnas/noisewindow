@@ -90,9 +90,12 @@ const SchedulePreview: React.FC = () => {
     tba: 'bg-status-busy',
   };
 
-  const getStatusLabel = (status: string) => {
+  const getStatusLabel = (status: string, isUpcoming: boolean = false) => {
     if (status === 'tba') return t.status.tba;
-    if (status === 'off') return t.status.off;
+    if (status === 'off') {
+      // Use "De Folga" for upcoming days, regular "off" for today
+      return isUpcoming ? t.status.offUpcoming : t.status.off;
+    }
     return null;
   };
 
@@ -108,7 +111,7 @@ const SchedulePreview: React.FC = () => {
             <span className="text-sm text-muted-foreground">{today.timeRange}</span>
           ) : (
             <span className="text-sm text-muted-foreground italic">
-              {getStatusLabel(today.status)}
+              {getStatusLabel(today.status, false)}
             </span>
           )}
         </div>
@@ -132,7 +135,7 @@ const SchedulePreview: React.FC = () => {
                 <span className="text-xs text-muted-foreground">{day.timeRange}</span>
               ) : (
                 <span className="text-xs text-muted-foreground italic">
-                  {getStatusLabel(day.status)}
+                  {getStatusLabel(day.status, true)}
                 </span>
               )}
             </div>

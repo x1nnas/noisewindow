@@ -27,3 +27,19 @@ export const safeParseJSON = <T>(jsonString: string | null, fallback: T | null):
     return fallback;
   }
 };
+
+// Format countdown time (minutes) to human-readable string
+export const formatCountdown = (minutes: number, t: { hours: string; minutes: string }): string => {
+  if (minutes <= 0) return '';
+  
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  
+  if (hours > 0 && mins > 0) {
+    return `${hours}${t.hours} ${mins}${t.minutes}`;
+  } else if (hours > 0) {
+    return `${hours}${t.hours}`;
+  } else {
+    return `${mins}${t.minutes}`;
+  }
+};

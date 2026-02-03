@@ -17,7 +17,11 @@ export const translations = {
       working: 'Working',
       sleeping: 'Sleeping',
       off: 'Off',
+      offUpcoming: 'Off',
       tba: 'TBA',
+      workStartingIn: 'Work starting in',
+      hours: 'h',
+      minutes: 'm',
     },
     schedule: {
       today: 'Today',
@@ -71,7 +75,11 @@ export const translations = {
       working: 'A Trabalhar',
       sleeping: 'A Dormir',
       off: 'Fora das horas de trabalho',
+      offUpcoming: 'De Folga',
       tba: 'A Definir',
+      workStartingIn: 'Trabalho a começar em',
+      hours: 'h',
+      minutes: 'm',
     },
     schedule: {
       today: 'Hoje',
