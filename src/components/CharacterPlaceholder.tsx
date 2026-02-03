@@ -38,16 +38,16 @@ const CharacterPlaceholder: React.FC<CharacterPlaceholderProps> = ({ status = 'a
 
   return (
     <div className="relative flex items-center justify-center w-full aspect-square max-w-[400px] mx-auto">
-      {/* Outer glow ring */}
-      <div className="absolute inset-0 rounded-full bg-primary/5 animate-breathe" />
+      {/* Outer glow ring - very subtle white */}
+      <div className="absolute inset-0 rounded-full bg-white/10 animate-breathe" />
       
-      {/* Middle ring */}
-      <div className="absolute inset-3 rounded-full bg-primary/10 animate-breathe" style={{ animationDelay: '0.5s' }} />
+      {/* Middle ring - subtle white with slight tint */}
+      <div className="absolute inset-2 rounded-full bg-white/15 animate-breathe" style={{ animationDelay: '0.5s' }} />
       
-      {/* Inner container for character */}
-      <div className="relative w-5/6 aspect-square rounded-full bg-gradient-to-br from-primary/20 to-primary/5 shadow-soft flex items-center justify-center animate-float">
+      {/* Inner container for character - larger and whiter */}
+      <div className="relative w-full aspect-square rounded-full bg-gradient-to-br from-white/25 to-white/10 shadow-soft flex items-center justify-center animate-float">
         {/* DotLottie animation for binary .lottie files */}
-        <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full h-full flex items-center justify-center p-4">
           <DotLottieReact
             src={animationPath}
             loop

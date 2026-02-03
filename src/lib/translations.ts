@@ -58,7 +58,7 @@ export const translations = {
     status: {
       working: 'A Trabalhar',
       sleeping: 'A Dormir',
-      off: 'Indisponível',
+      off: 'Fora das horas de trabalho',
       tba: 'A Definir',
     },
     schedule: {
