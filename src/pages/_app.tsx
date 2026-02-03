@@ -49,11 +49,18 @@ export default function App({ Component, pageProps }: AppProps) {
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
           
-          <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-          <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+          <link rel="icon" type="image/png" href="/icons/ios/32.png" sizes="32x32" />
+          <link rel="icon" type="image/png" href="/icons/ios/64.png" sizes="64x64" />
+          <link rel="icon" type="image/png" href="/icons/ios/128.png" sizes="128x128" />
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-          <link rel="manifest" href="/favicon/site.webmanifest" />
+          
+          {/* iOS Apple Touch Icons */}
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/ios/180.png" />
+          <link rel="apple-touch-icon" sizes="152x152" href="/icons/ios/152.png" />
+          <link rel="apple-touch-icon" sizes="167x167" href="/icons/ios/167.png" />
+          <link rel="apple-touch-icon" sizes="120x120" href="/icons/ios/120.png" />
+          
+          <link rel="manifest" href="/manifest.json" />
         </Head>
         <Component {...pageProps} />
       </LanguageProvider>
