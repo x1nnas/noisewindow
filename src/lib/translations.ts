@@ -6,6 +6,7 @@ export const translations = {
       morning: 'Good Morning',
       afternoon: 'Good Afternoon',
       evening: 'Good Evening',
+      lateNight: 'What are you doing up at this time? Just go to bed 😂',
     },
     welcome: {
       title: 'Welcome to NoiseWindow',
@@ -64,6 +65,7 @@ export const translations = {
       morning: 'Bom Dia',
       afternoon: 'Boa Tarde',
       evening: 'Boa Noite',
+      lateNight: 'Acordado a estas horas? Bom dia',
     },
     welcome: {
       title: 'Bem-vindo ao NoiseWindow',

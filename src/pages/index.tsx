@@ -16,6 +16,22 @@ import { TranslationType } from '@/lib/translations';
 const getGreeting = (t: TranslationType, name?: string) => {
   const hour = new Date().getHours();
   let greeting: string;
+  
+  // Funny message between 2am and 7am
+  if (hour >= 2 && hour < 7) {
+    greeting = t.greeting.lateNight;
+    // For Portuguese, add the name after "Bom dia"
+    if (name) {
+      // Check if it's Portuguese by checking if the greeting contains "Bom dia"
+      if (t.greeting.lateNight.includes('Bom dia')) {
+        return `${t.greeting.lateNight}, ${name}`;
+      }
+      // For English, just return the greeting as is (it already has the emoji)
+      return greeting;
+    }
+    return greeting;
+  }
+  
   if (hour < 12) {
     greeting = t.greeting.morning;
   } else if (hour < 18) {
