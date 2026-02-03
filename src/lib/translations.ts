@@ -7,6 +7,12 @@ export const translations = {
       afternoon: 'Good Afternoon',
       evening: 'Good Evening',
     },
+    welcome: {
+      title: 'Welcome to NoiseWindow',
+      description: 'What should we call you?',
+      placeholder: 'Enter your first name',
+      continue: 'Continue',
+    },
     status: {
       working: 'Working',
       sleeping: 'Sleeping',
@@ -54,6 +60,12 @@ export const translations = {
       morning: 'Bom Dia',
       afternoon: 'Boa Tarde',
       evening: 'Boa Noite',
+    },
+    welcome: {
+      title: 'Bem-vindo ao NoiseWindow',
+      description: 'Como devemos chamar-te?',
+      placeholder: 'Introduz o teu primeiro nome',
+      continue: 'Continuar',
     },
     status: {
       working: 'A Trabalhar',

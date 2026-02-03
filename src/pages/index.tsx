@@ -6,21 +6,25 @@ import SchedulePreview from '@/components/SchedulePreview';
 import PinPrompt from '@/components/PinPrompt';
 import AdminPage from '@/components/AdminPage';
 import LanguageToggle from '@/components/LanguageToggle';
+import NamePrompt from '@/components/NamePrompt';
 import { Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { safeParseJSON, timeToMinutes } from '@/lib/validation';
 import { TranslationType } from '@/lib/translations';
 
-const getGreeting = (t: TranslationType) => {
+const getGreeting = (t: TranslationType, name?: string) => {
   const hour = new Date().getHours();
+  let greeting: string;
   if (hour < 12) {
-    return t.greeting.morning;
+    greeting = t.greeting.morning;
   } else if (hour < 18) {
-    return t.greeting.afternoon;
+    greeting = t.greeting.afternoon;
   } else {
-    return t.greeting.evening;
+    greeting = t.greeting.evening;
   }
+  
+  return name ? `${greeting}, ${name}` : greeting;
 };
 
 // Check if current time is within sleeping hours (00:00 to 08:30)
@@ -92,15 +96,34 @@ const calculateStatus = (t: TranslationType): {
 const Index = () => {
   const [showPinPrompt, setShowPinPrompt] = useState(false);
   const [showAdminPage, setShowAdminPage] = useState(false);
+  const [showNamePrompt, setShowNamePrompt] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedName = localStorage.getItem('noisewindow-user-name');
+      return !savedName;
+    }
+    return false;
+  });
+  const [userName, setUserName] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('noisewindow-user-name');
+    }
+    return null;
+  });
   const [currentStatus, setCurrentStatus] = useState<'available' | 'busy' | 'off' | 'sleeping'>('available');
   const [statusLabel, setStatusLabel] = useState('Working');
-  const [greeting, setGreeting] = useState('Good Morning'); // Default for SSR
+  const [greeting, setGreeting] = useState(() => {
+    // Default for SSR - will be updated after hydration
+    return 'Good Morning';
+  });
   const { t } = useLanguage();
 
   // Update greeting after hydration to avoid mismatch
   useEffect(() => {
-    setGreeting(getGreeting(t));
-  }, [t]);
+    const updateGreeting = () => {
+      setGreeting(getGreeting(t, userName || undefined));
+    };
+    updateGreeting();
+  }, [t, userName]);
 
   // Calculate status on mount and when schedule updates
   useEffect(() => {
@@ -139,6 +162,11 @@ const Index = () => {
 
   const handleAdminBack = () => {
     setShowAdminPage(false);
+  };
+
+  const handleNameSuccess = (name: string) => {
+    setUserName(name);
+    setShowNamePrompt(false);
   };
 
   if (showAdminPage) {
@@ -191,6 +219,11 @@ const Index = () => {
           open={showPinPrompt}
           onOpenChange={setShowPinPrompt}
           onSuccess={handlePinSuccess}
+        />
+        
+        <NamePrompt
+          open={showNamePrompt}
+          onSuccess={handleNameSuccess}
         />
       </div>
     </>
