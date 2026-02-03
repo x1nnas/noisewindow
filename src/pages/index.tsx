@@ -9,9 +9,10 @@ import LanguageToggle from '@/components/LanguageToggle';
 import { Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { safeParseJSON } from '@/lib/validation';
+import { safeParseJSON, timeToMinutes } from '@/lib/validation';
+import { TranslationType } from '@/lib/translations';
 
-const getGreeting = (t: typeof import('@/lib/translations').translations[import('@/lib/translations').Language]) => {
+const getGreeting = (t: TranslationType) => {
   const hour = new Date().getHours();
   if (hour < 12) {
     return t.greeting.morning;
@@ -21,8 +22,6 @@ const getGreeting = (t: typeof import('@/lib/translations').translations[import(
     return t.greeting.evening;
   }
 };
-
-import { timeToMinutes } from '@/lib/validation';
 
 // Check if current time is within sleeping hours (00:00 to 08:30)
 const isSleepingHours = (): boolean => {
@@ -34,7 +33,7 @@ const isSleepingHours = (): boolean => {
 };
 
 // Calculate current status based on time and schedule
-const calculateStatus = (t: typeof import('@/lib/translations').translations[import('@/lib/translations').Language]): {
+const calculateStatus = (t: TranslationType): {
   status: 'available' | 'busy' | 'off' | 'sleeping';
   label: string;
 } => {
