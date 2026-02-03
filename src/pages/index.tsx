@@ -27,12 +27,12 @@ const getGreeting = (t: TranslationType, name?: string) => {
   return name ? `${greeting}, ${name}` : greeting;
 };
 
-// Check if current time is within sleeping hours (00:00 to 08:30)
+// Check if current time is within sleeping hours (00:00 to 08:00)
 const isSleepingHours = (): boolean => {
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
   const sleepStart = 0; // 00:00
-  const sleepEnd = 8 * 60 + 30; // 08:30
+  const sleepEnd = 8 * 60; // 08:00
   return currentMinutes >= sleepStart && currentMinutes < sleepEnd;
 };
 
@@ -41,7 +41,7 @@ const calculateStatus = (t: TranslationType): {
   status: 'available' | 'busy' | 'off' | 'sleeping';
   label: string;
 } => {
-  // First check if it's sleeping hours (00:00 to 08:30)
+  // First check if it's sleeping hours (00:00 to 08:00)
   if (isSleepingHours()) {
     return { status: 'sleeping', label: t.status.sleeping };
   }
@@ -77,11 +77,12 @@ const calculateStatus = (t: TranslationType): {
         const currentMinutes = now.getHours() * 60 + now.getMinutes();
         const startMinutes = timeToMinutes(todayData.start);
         const endMinutes = timeToMinutes(todayData.end);
+        const eightAM = 8 * 60; // 08:00
         
         if (currentMinutes >= startMinutes && currentMinutes < endMinutes) {
           return { status: 'available', label: t.status.working };
-        } else if (currentMinutes < startMinutes) {
-          // Before work starts - show countdown
+        } else if (currentMinutes < startMinutes && currentMinutes >= eightAM) {
+          // After 8am and before work starts - show countdown
           const minutesUntilStart = startMinutes - currentMinutes;
           const countdown = formatCountdown(minutesUntilStart, t.status);
           return { 
