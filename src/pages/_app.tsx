@@ -45,6 +45,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name="twitter:title" content="NoiseWindow" />
           <meta name="twitter:description" content="Show your current availability status with beautiful animations" />
           
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+          
           <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
           <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
